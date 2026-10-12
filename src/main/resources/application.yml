@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  application:
+    name: ontology-tools
+ontology:
+  source: ${ONTOLOGY_SOURCE:./src/main/resources/sample-ontology.ttl}
+  data-directory: ${ONTOLOGY_DATA_DIR:./data/tdb2}
+  retrieval-limit: ${ONTOLOGY_RETRIEVAL_LIMIT:20}
+  ollama-base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+  embedding-model: ${OLLAMA_EMBEDDING_MODEL:qwen3-embedding:4b}
+  bm25-candidates: ${ONTOLOGY_BM25_CANDIDATES:50}
+  vector-candidates: ${ONTOLOGY_VECTOR_CANDIDATES:50}
+  graph-depth: ${ONTOLOGY_GRAPH_DEPTH:2}
+  graph-node-limit: ${ONTOLOGY_GRAPH_NODE_LIMIT:100}
+  embedding-batch-size: ${ONTOLOGY_EMBEDDING_BATCH_SIZE:32}
+  embedding-dimensions: ${ONTOLOGY_EMBEDDING_DIMENSIONS:1024}
+  index-version: ${ONTOLOGY_INDEX_VERSION:2}
+  reranker-enabled: ${ONTOLOGY_RERANKER_ENABLED:false}
+  reranker-url: ${ONTOLOGY_RERANKER_URL:}
+  reranker-model: ${ONTOLOGY_RERANKER_MODEL:}
+  reranker-api-key: ${ONTOLOGY_RERANKER_API_KEY:}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

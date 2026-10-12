@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #18211f;
+  background: #f2f0e9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #18211f;
+  --paper: #f2f0e9;
+  --line: #c9c8bd;
+  --accent: #d95d39;
+  --green: #496b5d;
+  --muted: #747a70;
+}
+
+* { box-sizing: border-box; }
+
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+
+button, textarea { font: inherit; }
+
+.shell {
+  min-height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 5vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 22px;
+}
+
+.eyebrow, .muted, footer {
+  color: var(--muted);
+  font: 500 11px 'DM Mono', monospace;
+  letter-spacing: .08em;
+}
+
+h1 {
+  margin: 24px 0 0;
+  font-size: clamp(40px, 6vw, 82px);
+  line-height: .95;
+  letter-spacing: -.04em;
+  font-weight: 600;
+}
+
+.status {
+  padding-top: 5px;
+  color: var(--green);
+  font: 500 12px 'DM Mono', monospace;
+  white-space: nowrap;
+}
+
+.status.is-offline { color: var(--accent); }
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, .6fr);
+  gap: 32px;
+  flex: 1;
+  padding: 44px 0;
+}
+
+.conversation { min-height: 350px; }
+
+.welcome {
+  max-width: 560px;
+  border-left: 3px solid var(--accent);
+  padding: 3px 0 3px 20px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.welcome p { margin: 0; }
+
+.mark {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--accent);
+  font-size: 32px;
+}
+
+.exchange { margin: 0 0 34px; max-width: 760px; }
+.message p { margin: 10px 0 0; font-size: 18px; line-height: 1.5; white-space: pre-wrap; }
+.message.answer { border-left: 3px solid var(--accent); padding-left: 20px; margin-top: 18px; }
+.message.answer.has-error .answer-text { color: var(--accent); }
+
+.activity {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: rgba(73, 107, 93, .08);
+  border: 1px solid rgba(73, 107, 93, .2);
+}
+
+.activity-title {
+  color: var(--green);
+  font: 500 10px 'DM Mono', monospace;
+  letter-spacing: .08em;
+}
+
+.activity-items { display: grid; gap: 7px; margin-top: 9px; }
+.activity-item { color: var(--muted); font: 13px 'DM Mono', monospace; }
+.activity-dot { display: inline-block; width: 6px; height: 6px; margin: 0 8px 1px 0; border-radius: 50%; background: var(--accent); }
+.answer-text { white-space: pre-wrap; }
+
+.evidence { border-left: 1px solid var(--line); padding-left: 25px; }
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  font: 500 12px 'DM Mono', monospace;
+  text-transform: uppercase;
+}
+
+.empty-evidence { padding-top: 18px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.evidence-facts { white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); font: 11px/1.55 'DM Mono', monospace; }
+
+.composer { display: flex; gap: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+
+.composer textarea {
+  flex: 1;
+  min-height: 68px;
+  resize: vertical;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 18px 'Space Grotesk', sans-serif;
+}
+
+.composer textarea::placeholder { color: #9a9b90; }
+
+.composer button {
+  align-self: flex-end;
+  border: 0;
+  padding: 15px 22px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 600 14px 'Space Grotesk', sans-serif;
+  cursor: pointer;
+}
+
+.composer button:hover:not(:disabled) { background: var(--accent); }
+.composer button:disabled { cursor: wait; opacity: .6; }
+
+footer { display: flex; justify-content: space-between; gap: 16px; padding-top: 18px; font-size: 10px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .shell { padding: 22px 6vw; }
+  .workspace { display: block; padding: 32px 0; }
+  .evidence { margin-top: 30px; border-top: 1px solid var(--line); border-left: 0; padding: 22px 0 0; }
+  .composer { align-items: stretch; }
+  .composer button { padding: 12px 15px; }
+  h1 { font-size: 48px; }
+}

@@ -1,0 +1,88 @@
+@prefix ex:   <https://example.org/ontology/sample#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/ontology/sample> a owl:Ontology ;
+    rdfs:label "Connected World Sample Ontology"@en ;
+    rdfs:comment "A teaching and retrieval fixture that connects people, organizations, places, projects, artifacts, events, science, health, transport, and the environment."@en ;
+    owl:versionInfo "1.0" .
+
+# Core entity hierarchy
+ex:Thing a owl:Class ; rdfs:label "Thing" .
+ex:Agent a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Agent" .
+ex:Person a owl:Class ; rdfs:subClassOf ex:Agent ; rdfs:label "Person" .
+ex:Organization a owl:Class ; rdfs:subClassOf ex:Agent ; rdfs:label "Organization" .
+ex:Company a owl:Class ; rdfs:subClassOf ex:Organization ; rdfs:label "Company" .
+ex:University a owl:Class ; rdfs:subClassOf ex:Organization ; rdfs:label "University" .
+ex:GovernmentAgency a owl:Class ; rdfs:subClassOf ex:Organization ; rdfs:label "Government agency" .
+ex:Team a owl:Class ; rdfs:subClassOf ex:Organization ; rdfs:label "Team" .
+ex:Place a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Place" .
+ex:Country a owl:Class ; rdfs:subClassOf ex:Place ; rdfs:label "Country" .
+ex:City a owl:Class ; rdfs:subClassOf ex:Place ; rdfs:label "City" .
+ex:Facility a owl:Class ; rdfs:subClassOf ex:Place ; rdfs:label "Facility" .
+ex:Artifact a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Artifact" .
+ex:Document a owl:Class ; rdfs:subClassOf ex:Artifact ; rdfs:label "Document" .
+ex:Dataset a owl:Class ; rdfs:subClassOf ex:Artifact ; rdfs:label "Dataset" .
+ex:SoftwareSystem a owl:Class ; rdfs:subClassOf ex:Artifact ; rdfs:label "Software system" .
+ex:Vehicle a owl:Class ; rdfs:subClassOf ex:Artifact ; rdfs:label "Vehicle" .
+ex:Event a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Event" .
+ex:Meeting a owl:Class ; rdfs:subClassOf ex:Event ; rdfs:label "Meeting" .
+ex:Publication a owl:Class ; rdfs:subClassOf ex:Event ; rdfs:label "Publication" .
+ex:Project a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Project" .
+ex:ResearchProject a owl:Class ; rdfs:subClassOf ex:Project ; rdfs:label "Research project" .
+ex:Service a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Service" .
+ex:HealthCondition a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Health condition" .
+ex:Species a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Species" .
+ex:Resource a owl:Class ; rdfs:subClassOf ex:Thing ; rdfs:label "Natural resource" .
+
+# Relationships
+ex:memberOf a owl:ObjectProperty ; rdfs:domain ex:Person ; rdfs:range ex:Organization ; rdfs:label "member of" .
+ex:worksFor a owl:ObjectProperty ; rdfs:subPropertyOf ex:memberOf ; rdfs:domain ex:Person ; rdfs:range ex:Organization ; rdfs:label "works for" .
+ex:leads a owl:ObjectProperty ; rdfs:domain ex:Person ; rdfs:range ex:Organization ; rdfs:label "leads" .
+ex:locatedIn a owl:ObjectProperty ; rdfs:domain ex:Thing ; rdfs:range ex:Place ; rdfs:label "located in" .
+ex:partOf a owl:ObjectProperty, owl:TransitiveProperty ; rdfs:domain ex:Thing ; rdfs:range ex:Thing ; rdfs:label "part of" .
+ex:participatesIn a owl:ObjectProperty ; rdfs:domain ex:Agent ; rdfs:range ex:Event ; rdfs:label "participates in" .
+ex:organizes a owl:ObjectProperty ; rdfs:domain ex:Organization ; rdfs:range ex:Event ; rdfs:label "organizes" .
+ex:authored a owl:ObjectProperty ; rdfs:domain ex:Person ; rdfs:range ex:Document ; rdfs:label "authored" .
+ex:usesDataset a owl:ObjectProperty ; rdfs:domain ex:Project ; rdfs:range ex:Dataset ; rdfs:label "uses dataset" .
+ex:produces a owl:ObjectProperty ; rdfs:domain ex:Project ; rdfs:range ex:Artifact ; rdfs:label "produces" .
+ex:dependsOn a owl:ObjectProperty ; rdfs:domain ex:Thing ; rdfs:range ex:Thing ; rdfs:label "depends on" .
+ex:collaboratesWith a owl:ObjectProperty, owl:SymmetricProperty ; rdfs:domain ex:Agent ; rdfs:range ex:Agent ; rdfs:label "collaborates with" .
+ex:hasCondition a owl:ObjectProperty ; rdfs:domain ex:Person ; rdfs:range ex:HealthCondition ; rdfs:label "has condition" .
+ex:observesSpecies a owl:ObjectProperty ; rdfs:domain ex:ResearchProject ; rdfs:range ex:Species ; rdfs:label "observes species" .
+ex:monitorsResource a owl:ObjectProperty ; rdfs:domain ex:ResearchProject ; rdfs:range ex:Resource ; rdfs:label "monitors resource" .
+ex:servesArea a owl:ObjectProperty ; rdfs:domain ex:Service ; rdfs:range ex:Place ; rdfs:label "serves area" .
+
+# Literal attributes
+ex:name a owl:DatatypeProperty ; rdfs:domain ex:Thing ; rdfs:range xsd:string ; rdfs:label "name" .
+ex:description a owl:DatatypeProperty ; rdfs:domain ex:Thing ; rdfs:range xsd:string ; rdfs:label "description" .
+ex:email a owl:DatatypeProperty ; rdfs:domain ex:Person ; rdfs:range xsd:string ; rdfs:label "email" .
+ex:birthDate a owl:DatatypeProperty ; rdfs:domain ex:Person ; rdfs:range xsd:date ; rdfs:label "birth date" .
+ex:population a owl:DatatypeProperty ; rdfs:domain ex:Place ; rdfs:range xsd:integer ; rdfs:label "population" .
+ex:budget a owl:DatatypeProperty ; rdfs:domain ex:Project ; rdfs:range xsd:decimal ; rdfs:label "budget" .
+ex:startDate a owl:DatatypeProperty ; rdfs:domain ex:Event ; rdfs:range xsd:date ; rdfs:label "start date" .
+ex:status a owl:DatatypeProperty ; rdfs:domain ex:Thing ; rdfs:range xsd:string ; rdfs:label "status" .
+ex:latitude a owl:DatatypeProperty ; rdfs:domain ex:Place ; rdfs:range xsd:decimal ; rdfs:label "latitude" .
+ex:longitude a owl:DatatypeProperty ; rdfs:domain ex:Place ; rdfs:range xsd:decimal ; rdfs:label "longitude" .
+
+# Example individuals and cross-domain connections
+ex:mayaChen a ex:Person ; ex:name "Maya Chen" ; ex:email "maya.chen@example.org" ; ex:worksFor ex:greenfieldUniversity ; ex:leads ex:riverWatch ; ex:participatesIn ex:climateForum ; ex:authored ex:riverReport ; ex:collaboratesWith ex:omarDiallo ; ex:hasCondition ex:asthma .
+ex:omarDiallo a ex:Person ; ex:name "Omar Diallo" ; ex:worksFor ex:cityLab ; ex:participatesIn ex:climateForum ; ex:collaboratesWith ex:mayaChen .
+ex:greenfieldUniversity a ex:University ; ex:name "Greenfield University" ; ex:locatedIn ex:harborCity ; ex:partOf ex:countryOfNorland .
+ex:cityLab a ex:GovernmentAgency ; ex:name "Harbor City Environmental Lab" ; ex:locatedIn ex:harborCity .
+ex:ecoDataTeam a ex:Team ; ex:name "Eco Data Team" ; ex:partOf ex:greenfieldUniversity ; ex:collaboratesWith ex:cityLab .
+ex:harborCity a ex:City ; ex:name "Harbor City" ; ex:population 845000 ; ex:latitude "37.78"^^xsd:decimal ; ex:longitude "-122.42"^^xsd:decimal ; ex:partOf ex:countryOfNorland .
+ex:countryOfNorland a ex:Country ; ex:name "Norland" .
+ex:wetlandStation a ex:Facility ; ex:name "North Marsh Field Station" ; ex:locatedIn ex:harborCity .
+ex:riverWatch a ex:ResearchProject ; ex:name "River Watch" ; ex:description "Measures river health, biodiversity, and water quality." ; ex:status "active" ; ex:budget "250000.00"^^xsd:decimal ; ex:usesDataset ex:riverMeasurements ; ex:produces ex:riverReport ; ex:observesSpecies ex:blueHeron ; ex:monitorsResource ex:freshWater ; ex:locatedIn ex:harborCity ; ex:dependsOn ex:sensorNetwork .
+ex:sensorNetwork a ex:SoftwareSystem ; ex:name "Open Water Sensor Network" ; ex:status "operational" .
+ex:riverMeasurements a ex:Dataset ; ex:name "Harbor River Measurements" ; ex:description "Daily water temperature and quality readings." ; ex:locatedIn ex:wetlandStation .
+ex:riverReport a ex:Document ; ex:name "Harbor River Annual Report" ; ex:description "Findings from the River Watch project." ; ex:status "published" .
+ex:climateForum a ex:Meeting ; ex:name "Regional Climate and Health Forum" ; ex:startDate "2026-05-14"^^xsd:date ; ex:locatedIn ex:harborCity ; ex:partOf ex:riverWatch .
+ex:blueHeron a ex:Species ; ex:name "Blue heron" ; ex:description "A wetland bird monitored by River Watch." .
+ex:freshWater a ex:Resource ; ex:name "Fresh water" ; ex:description "Freshwater resources in the Harbor River basin." .
+ex:asthma a ex:HealthCondition ; ex:name "Asthma" ; ex:description "A chronic respiratory condition." .
+ex:publicTransit a ex:Service ; ex:name "Harbor Transit" ; ex:servesArea ex:harborCity .
+ex:electricBus a ex:Vehicle ; ex:name "Electric bus 204" ; ex:partOf ex:publicTransit ; ex:locatedIn ex:harborCity .

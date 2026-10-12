@@ -1,0 +1,18 @@
+[
+  {
+    "question": "Who leads River Watch?",
+    "expected": ["mayaChen", "leads"]
+  },
+  {
+    "question": "What dataset does River Watch use?",
+    "expected": ["riverMeasurements", "usesDataset"]
+  },
+  {
+    "question": "Which species does River Watch monitor?",
+    "expected": ["blueHeron", "observesSpecies"]
+  },
+  {
+    "question": "Which organization is Maya Chen a member of?",
+    "expected": ["greenfieldUniversity", "worksFor"]
+  }
+]
